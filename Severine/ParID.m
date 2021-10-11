@@ -25,6 +25,7 @@ clear; close all; clc;
    theta_in = 295;
    omega_e = 125;
    endTime = IdData.mdot_in.time(end);
+   p0 = IdData.p.signals.values(1);
 
 % Display measurement values
     figure;
