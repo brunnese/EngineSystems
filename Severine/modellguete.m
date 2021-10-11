@@ -17,6 +17,7 @@ function V = modellguete(par, data, options)
    theta_in = 295;
    omega_e = 125;
    endTime = data.mdot_in.time(end);
+   p0 = data.p.signals.values(1);
 
 % Assign new parameter values (used in Simulink model SystemModel.slx)
     lambda_lw = par(1);
