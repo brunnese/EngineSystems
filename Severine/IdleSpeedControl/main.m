@@ -4,7 +4,7 @@ clear all
 run Par;
 timespan = [0 10];
 du = 25;
-ualpha = 50;
+ualpha = 5;
 theta_m = 293;
 theta_a = 293;
 p_a = 10^5;
