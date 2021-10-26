@@ -10,7 +10,7 @@ theta_a = 295;
 p_a = 10^5;
 p_e = 1.2*10^5;
 
-[t,x,y] = sim('ISC_V1', timespan, par.simopt);
+[t,x,y] = sim('ISC_V2', timespan, par.simopt);
 
 subplot(3,1,1)
 grid on, hold on
