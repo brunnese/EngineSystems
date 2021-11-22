@@ -1,0 +1,8 @@
+download all files:
+
+- new par.m file with const p_a, p_e and other simulation param
+- simulation is the simulink file that includes the controller and an update version of non linear model
+- mat file for linearized system matrices
+
+currently, initial values for delays have to be changed
+
