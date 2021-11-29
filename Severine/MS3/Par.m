@@ -47,5 +47,15 @@ par.theta_a = 298;
 par.theta_m = 300;
 par.ul = 0;
 par.pm_initial = 0.3*10^5;
-par.omegae_initial = 70;
+par.omegae_initial = 100;
 
+% steady state values
+par.ss_mdotalpha = 0.0035;
+par.ss_duign = -25;
+par.ss_omegae = 107.85;
+
+% gains
+par.Ki = 5;
+par.q = 1;
+par.r1 = 1.5;
+par.r2 = 0.05;
