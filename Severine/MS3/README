@@ -4,15 +4,17 @@ download all files:
 - simulation is the simulink file that includes the controller and an update version of non linear model
 - mat file for linearized system matrices
 
-first tuning done - Ki, r1, r2 and q
+first tuning done - Ki, r1, r2 and q with trajectory from dynamic_0001.mat
+
+- I sent a first controller to Pol, which you find in controller1.mat
 
 next steps:
 - look at bode plot --> (I think in there is an error in my transfer function) 
   and I don't know which tranfer function has to have crossover frequency under 4 rad/s
-- tune with a simple trajectory (steps and ramps)
 - find robustness
 - simulate observer only to see what it's doing
 - with load on and off
+- tune with different gains so that we can test different controller
 
 
 
