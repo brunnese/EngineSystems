@@ -1,6 +1,7 @@
 clc
 clear all
 
+load dynamic_0001;
 run Par;
 
 load LinSys
@@ -11,7 +12,7 @@ Cs = C;
 Ds = D;
 
 % extension
-Ki = 5;  % has to be tuned
+Ki = 8;  % has to be tuned
 Ae = 0;
 Be = [1 0];
 Ce = [Ki; 0];
@@ -30,8 +31,9 @@ R = [r1 0; 0 r2];
 Q = C'*C;
 K = lqr(A,B,Q,R);
 
+
 % LQG
-q = 1;     % to be tuned q → 0: fast observer = trust measurement, q → ∞: slow observer = trust model
+q = 0.01;     % to be tuned q → 0: fast observer = trust measurement, q → ∞: slow observer = trust model
 L = lqr(A',C',B*B',q)';
 
 % continuous matrices of whole controller
@@ -52,7 +54,9 @@ ISCS_Cd = sysD.C;
 ISCS_Dd = sysD.D;
 
 % create tranfer function 
-sysD = ss(ISCS_Ad,ISCS_Bd,ISCS_Cd,ISCS_Dd,Ts);
+%sysD = ss(ISCS_Ad,ISCS_Bd,ISCS_Cd,ISCS_Dd,Ts);
+sysC = ss(As,Bs,Cs,Ds);
+sysD = c2d(sysC,Ts);
 G = tf(sysD);
 G1 = tf(G.Numerator(1),G.Denominator(1),Ts);
 G2 = tf(G.Numerator(2),G.Denominator(2),Ts);
@@ -63,14 +67,15 @@ bode(G1,G2)
 grid on
 legend('G_{alpha}','G_{duign}')
 
+
 % normalisation
 ISCS_Ty = Ty_omega_e;
 ISCS_Tu = [Tu_alpha; Tu_ign];
 
 
 % simulation where timespan last time value
-omega_ref = 160;
-timespan = 50;
+omega_ref = meas.omega_e;
+timespan = omega_ref.time(end);
 
 [t,x,y] = sim('simulation', timespan, par.simopt);
 % plot of omega, u_alpha and du_ign
@@ -78,7 +83,7 @@ timespan = 50;
 figure(2);
 subplot(3,1,1)
 grid on, hold on
-plot(t,y(:,1),[t(1) t(end)],[omega_ref omega_ref],'--')
+plot(t,y(:,1),omega_ref.time, omega_ref.signals.values,'--')
 xlabel('Time [s]')
 ylabel('$\omega_{e}$ [rad/s]','interpreter','latex')
 subplot(3,1,2)
@@ -93,7 +98,10 @@ xlabel('Time [s]')
 ylabel('$du_{ign}$ [deg]','interpreter','latex')
 
 % error of omega to omega ref for intuitiv tuning
-e = 0;
-for i = 1:length(t)
-    e = e + abs(y(i) - omega_ref)*Ts;
-end
+% e = 0;
+% for i = 1:length(t)
+%     e = e + abs(y(i) - omega_ref)*Ts;
+% end
+
+%save('controller1','ISCS_Ty', 'ISCS_Tu', 'ISCS_Ad', 'ISCS_Bd', 'ISCS_Cd', 'ISCS_Dd');   
+    
