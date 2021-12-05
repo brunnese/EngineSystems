@@ -106,5 +106,6 @@ xlabel('Time [s]')
 ylabel('$du_{ign}$ [deg]','interpreter','latex')
 
 ISCS_Tu = diag(ISCS_Tu);
-save('controller3','ISCS_Ty', 'ISCS_Tu', 'ISCS_Ad', 'ISCS_Bd', 'ISCS_Cd', 'ISCS_Dd');   
+% to save controller as mat file
+%save('controller3','ISCS_Ty', 'ISCS_Tu', 'ISCS_Ad', 'ISCS_Bd', 'ISCS_Cd', 'ISCS_Dd');   
     
