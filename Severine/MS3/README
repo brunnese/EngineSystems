@@ -8,6 +8,11 @@ first tuning done - Ki, r1, r2 and q with trajectory from dynamic_0001.mat
 
 - I sent a first controller to Pol, which you find in controller1.mat
 
+Controllers:
+controller1.mat : Ki = 8, r1 = 1.5, r2 = 0.05, q = 0.05     --> medium observer, medium control
+controller2.mat : Ki = 12, r1 = 2, r2 = 0.01 q = 0.01.      --> fast observer, aggressive control
+controller3.mat : Ki = 12, r1 = 2, r2 = 0.01 q = 0.1        --> slower observer, aggressive control
+
 next steps:
 - look at bode plot --> (I think in there is an error in my transfer function) 
   and I don't know which tranfer function has to have crossover frequency under 4 rad/s
