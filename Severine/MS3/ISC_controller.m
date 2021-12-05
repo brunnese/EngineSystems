@@ -12,7 +12,7 @@ Cs = C;
 Ds = D;
 
 % extension
-Ki = 8;  % has to be tuned
+Ki = 12;  % has to be tuned c1: ki = 8
 Ae = 0;
 Be = [1 0];
 Ce = [Ki; 0];
@@ -25,15 +25,16 @@ C = [Cs Ds*Ce];
 D = Ds*De;
 
 % LQR 
-r1 = 1.5;    % to be tuned
-r2 = 0.05;    % to be tuned
+r1 = 2;    % to be tuned: c1 r1= 1.5
+r2 = 0.01;    % to be tuned: c1, r2 = 0.05
 R = [r1 0; 0 r2];
 Q = C'*C;
 K = lqr(A,B,Q,R);
 
 
 % LQG
-q = 0.01;     % to be tuned q → 0: fast observer = trust measurement, q → ∞: slow observer = trust model
+q = 0.1;     % to be tuned c1 q = 0.01, 
+% q → 0: fast observer = trust measurement, q → ∞: slow observer = trust model
 L = lqr(A',C',B*B',q)';
 
 % continuous matrices of whole controller
@@ -80,6 +81,13 @@ timespan = omega_ref.time(end);
 [t,x,y] = sim('simulation', timespan, par.simopt);
 % plot of omega, u_alpha and du_ign
 
+e = 0;
+for i = 1:timespan
+    e = e + abs(meas.omega_e.signals.values(i) - y(i,1));
+end
+
+
+
 figure(2);
 subplot(3,1,1)
 grid on, hold on
@@ -97,11 +105,6 @@ plot(t,y(:,3))
 xlabel('Time [s]')
 ylabel('$du_{ign}$ [deg]','interpreter','latex')
 
-% error of omega to omega ref for intuitiv tuning
-% e = 0;
-% for i = 1:length(t)
-%     e = e + abs(y(i) - omega_ref)*Ts;
-% end
-
-%save('controller1','ISCS_Ty', 'ISCS_Tu', 'ISCS_Ad', 'ISCS_Bd', 'ISCS_Cd', 'ISCS_Dd');   
+ISCS_Tu = diag(ISCS_Tu);
+save('controller3','ISCS_Ty', 'ISCS_Tu', 'ISCS_Ad', 'ISCS_Bd', 'ISCS_Cd', 'ISCS_Dd');   
     
