@@ -1,0 +1,3 @@
+- Implemented observer in simulation.slx as a standalone subsystem with output to simout
+- ISC_controller.m file now plots observer output.
+- Still has option to plot OL/CL bode plots (otherwise same as initial version)
