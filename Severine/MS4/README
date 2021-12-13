@@ -1,0 +1,21 @@
+to run download all files in this folder:
+
+- controller4.mat is the controller that worked best on the first testbench session
+- tuning can be done in ISC_controller.m
+
+- bode plot and nyquist plot should now be of the right transfer function
+- cost is close to one on testbench: 153 on testbench, 176 in simulink
+
+to be done:
+- get info on tuning from nyquist and bode
+- use controller 4 as a start to get new controllers
+- q can be tuned independetly from the other param: good value is q = 0.05. 
+- one shouldn't go below 0.05, might be worth it to try q = 0.1 
+
+
+controller:
+- controller1: Ki = 5.5, r1 = 2.0, r2= 0.01 q = 0.05
+- controller2: KI = 6, r1 = 2.0, r2 = 0.005, q = 0.05
+- controller3: KI = 4, r1 = 1.5, r2 = 0.01, q = 0.03
+- controller4: KI = 4, r1 = 2, r2 = 0.01, q = 0.05
+- controller5: Ki = 5.5, r1 = 2, r2 = 0.01, q = 0.03
